@@ -1,0 +1,29 @@
+# file: ansible/playbook.yml
+---
+ - name: Main Deploy Machine
+   # ansible hosts config
+   hosts: localVM
+   sudo: True
+   vars_files:
+     - config.yml
+
+   roles:
+    - init
+    - nginx
+    - php71
+    # - mysql57
+    # - redis
+   post_tasks:
+    - name: Sync source code
+      synchronize: src={{source_code_folder}} dest={{nginx_root}}
+    - name: Chang web root owner
+      become: true
+      file: path={{nginx_root}} state=directory owner=nginx group=nginx recurse=yes
+    - name: Make nginx localhost.conf to default.conf
+      become: true
+      command: "{{item}}"
+      with_items:
+        - mv /etc/nginx/conf.d/localhost.conf /etc/nginx/conf.d/default.conf
+      notify:
+        - restart nginx
+        - restart php-fpm
