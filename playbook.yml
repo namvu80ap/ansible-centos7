@@ -11,11 +11,13 @@
     - init
     - nginx
     - php71
-    # - mysql57
+    - mysql57
     # - redis
    post_tasks:
     - name: Sync source code
       synchronize: src={{source_code_folder}} dest={{nginx_root}}
+      tags:
+        - synchronize-source
     - name: Chang web root owner
       become: true
       file: path={{nginx_root}} state=directory owner=nginx group=nginx recurse=yes

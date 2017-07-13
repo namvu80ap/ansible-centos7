@@ -32,8 +32,8 @@
     - php-gd
     - php-fpm
     - php-common
-  notify:
-  - restart nginx
+  # notify:
+  # - restart nginx
 
 - name: Change default php-fpm config
   copy: src=config_templates/php-fpm-default.tpl dest=/etc/php-fpm.d/www.conf

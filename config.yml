@@ -1,10 +1,10 @@
 #nginx config
-nginx_root: /var/www/projectName
-nginx_root_doc: /var/www/projectName/public
-nginx_root_api: /var/www/projectName
+nginx_root: /var/www/komehyo
+nginx_root_doc: /var/www/komehyo/api/public
+nginx_root_api: /var/www/komehyo
 nginx_http_port: 80
 nginx_server_name: localhost
 
 ####local config
-source_code_folder: /Users/v_nam/projects/projectName/
+source_code_folder: /Users/v_nam/projects/komehyo/
 admin_email: v_nam@yumemi.co.jp
